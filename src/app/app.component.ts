@@ -7,4 +7,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Shop-Recipes';
+  currFeature='recipe';
+  onNavigate(event :any)
+  {
+    this.currFeature=event;
+  }
 }
