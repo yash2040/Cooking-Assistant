@@ -3,21 +3,21 @@
   
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="nav navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link" href="#" (click)="onSelect('recipe')">Recipes</a>
+        <li routerLinkActive="active">
+          <a class="nav-link" routerLink="/recipes">Recipes</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#" (click)="onSelect('shopping')">Shopping List</a>
+        <li routerLinkActive="active">
+          <a class="nav-link" routerLink="/shoppinglist">Shopping List</a>
         </li>
       </ul>
     <ul class="nav navbar-nav navbar-right">
         <li class="dropdown" app-Dropdown>
-          <a class="dropdown-toggle" href="#" role="button">
+          <a class="dropdown-toggle"  style="cursor: pointer;" role="button">
             Manage<span class="caret"></span>
           </a>
           <ul class="dropdown-menu">
-            <li><a href="#">Save Data</a></li>
-            <li><a href="#">Fetch Data</a></li>
+            <li><a  style="cursor: pointer;">Save Data</a></li>
+            <li><a  style="cursor: pointer;">Fetch Data</a></li>
           </ul>
         </li>
       </ul>

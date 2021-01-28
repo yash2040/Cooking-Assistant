@@ -6,10 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'Shop-Recipes';
-  currFeature='recipe';
-  onNavigate(event :any)
-  {
-    this.currFeature=event;
-  }
+  title = "Chef's Assistant";
 }
