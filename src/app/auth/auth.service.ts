@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
+import { ClientCredentials } from "../clientcredentials";
 
 interface AuthResponseData{
     kind:string,
@@ -19,7 +20,7 @@ export class AuthService{
     }
     signUp(email:string,password:string)
     {
-       return this.http.post<AuthResponseData>("https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=[]",
+       return this.http.post<AuthResponseData>("https://identitytoolkit.googleapis.com/v1/accounts:signUp?key="+ClientCredentials.project_id,
         {
             email:email,
             password:password,
