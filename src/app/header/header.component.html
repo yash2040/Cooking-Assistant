@@ -3,10 +3,10 @@
   
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="nav navbar-nav">
-        <li routerLinkActive="active">
+        <li routerLinkActive="active" *ngIf="isAuthenticated">
           <a class="nav-link" routerLink="/recipes">Recipes</a>
         </li>
-        <li routerLinkActive="active">
+        <li routerLinkActive="active" *ngIf="!isAuthenticated">
           <a class="nav-link" routerLink="/auth">Authenticate</a>
         </li>
         <li routerLinkActive="active">
@@ -14,7 +14,10 @@
         </li>
       </ul>
     <ul class="nav navbar-nav navbar-right">
-        <li class="dropdown" app-Dropdown>
+         <li *ngIf="isAuthenticated">
+           <a class="nav-link" style="cursor: pointer;" (click)="onLogout()">Logout</a>
+         </li>
+        <li class="dropdown" app-Dropdown *ngIf="isAuthenticated">
           <a class="dropdown-toggle"  style="cursor: pointer;" role="button">
             Manage<span class="caret"></span>
           </a>
