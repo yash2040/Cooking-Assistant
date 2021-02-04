@@ -5,6 +5,7 @@ import { BehaviorSubject, throwError } from 'rxjs';
 import { ClientCredentials } from "../clientcredentials";
 import { User } from "./user.model";
 import { Router } from "@angular/router";
+import { CookieService } from "ngx-cookie-service";
 
 export interface AuthResponseData{
     kind:string,
@@ -20,7 +21,7 @@ export class AuthService{
 
     user= new BehaviorSubject<User|null>(null);
     private tokenExpirationTimer:any;
-    constructor(private http: HttpClient,private router:Router){
+    constructor(private http: HttpClient,private router:Router,private cookieService:CookieService){
 
     }
     signUp(email:string,password:string)
@@ -48,7 +49,7 @@ export class AuthService{
     }
     autoLogin()
     {
-        let userString=sessionStorage.getItem('userData') || '{}';
+        let userString=this.cookieService.get('userData') || '{}';
         const userData:{
             email:string;
             id:string;
@@ -58,7 +59,6 @@ export class AuthService{
         console.log(userData);
         if(Object.keys(userData).length===0)
         {
-            //this.logout(); 
             return;
         }
         console.log(userData);
@@ -75,7 +75,7 @@ export class AuthService{
     {
         this.user.next(null);
         this.router.navigate(['/auth']);
-        sessionStorage.removeItem('userData');
+        this.cookieService.delete('userData');
         if(this.tokenExpirationTimer)
             clearTimeout(this.tokenExpirationTimer);
         this.tokenExpirationTimer=null;
@@ -95,7 +95,7 @@ export class AuthService{
         const user=new User(email,userId,tokenId,expirationDate);
         this.user.next(user);
         this.autoLogout(expiresIn*1000);
-        sessionStorage.setItem('userData', JSON.stringify(user));
+        this.cookieService.set('userData', JSON.stringify(user));
     }
     private handleError(errorResponse: HttpErrorResponse)
     {

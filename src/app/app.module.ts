@@ -18,6 +18,7 @@ import { AuthComponent } from './auth/auth.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
+import { CookieService } from 'ngx-cookie-service';
 
 
 @NgModule({
@@ -42,7 +43,7 @@ import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinne
     FormsModule,
     HttpClientModule
   ],
-  providers: [IngredientService],
+  providers: [IngredientService,CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
