@@ -1,13 +1,13 @@
-import { EventEmitter } from "@angular/core";
-import { Ingredient } from "../shared/ingredient.model";
+import { EventEmitter, Injectable } from "@angular/core";
+import { Subject } from "rxjs";
 import { Recipe } from "./recipe.model";
-
+@Injectable()
 export class RecipeService{
-    private recipes: Recipe[]=[
-        new Recipe("Pav Bhaji","Its an Indian dish","https://homepages.cae.wisc.edu/~ece533/images/airplane.png",[new Ingredient("Meat",32),new Ingredient("Flour",45)]),
-        new Recipe("Chowmein","Its an Indian dish","https://homepages.cae.wisc.edu/~ece533/images/airplane.png",[new Ingredient("Tea",67),new Ingredient("Sugar",60)])
-      ];
-    displayedRecipe= new EventEmitter<Recipe>();  
+   
+    recipeChanged= new Subject<Recipe[]>();
+    private recipes: Recipe[]=[];
+   
+    
       
     getRecipes(){
         return this.recipes.slice();
@@ -15,5 +15,11 @@ export class RecipeService{
     getRecipeById(id:number)
     {
         return this.recipes[id];
-    } 
+    }
+    
+    updateRecipes(recipes:Recipe[]){
+        this.recipes=recipes;
+        this.recipeChanged.next(this.recipes.slice());
+     //   console.log(this.recipes.slice());
+    }
 }

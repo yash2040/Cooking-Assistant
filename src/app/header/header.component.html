@@ -1,5 +1,5 @@
 <nav class="navbar navbar-default">
-    <a class="navbar-brand" href="#">Navbar</a>
+    <a class="navbar-brand">Navbar</a>
   
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="nav navbar-nav">
@@ -22,8 +22,8 @@
             Manage<span class="caret"></span>
           </a>
           <ul class="dropdown-menu">
-            <li><a  style="cursor: pointer;">Save Data</a></li>
-            <li><a  style="cursor: pointer;">Fetch Data</a></li>
+            <li><a  style="cursor: pointer;" (click)="onSaveData()">Save Data</a></li>
+            <li><a  style="cursor: pointer;" (click)="onFetchData()">Fetch Data</a></li>
           </ul>
         </li>
       </ul>

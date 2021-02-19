@@ -5,19 +5,14 @@ import { RecipeService } from './recipe.service';
 @Component({
   selector: 'app-recipes',
   templateUrl: './recipes.component.html',
-  styleUrls: ['./recipes.component.css'],
-  providers: [RecipeService]
+  styleUrls: ['./recipes.component.css']
 })
 export class RecipesComponent implements OnInit {
 
-  recipe:Recipe | undefined;
-  constructor(private recipeService:RecipeService) {
+  constructor() {
    }
 
   ngOnInit(): void {
-    this.recipeService.displayedRecipe.subscribe( (recipe:Recipe)=>{
-      this.recipe=recipe;
-    })
   }
 
 

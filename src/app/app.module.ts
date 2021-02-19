@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -19,6 +18,8 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
 import { CookieService } from 'ngx-cookie-service';
+import { DataStorageService } from './shared/data-storage-service';
+import { RecipeService } from './recipes/recipe.service';
 
 
 @NgModule({
@@ -43,7 +44,7 @@ import { CookieService } from 'ngx-cookie-service';
     FormsModule,
     HttpClientModule
   ],
-  providers: [IngredientService,CookieService],
+  providers: [CookieService,RecipeService,IngredientService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
