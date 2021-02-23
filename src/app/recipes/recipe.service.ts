@@ -7,19 +7,18 @@ export class RecipeService{
     recipeChanged= new Subject<Recipe[]>();
     private recipes: Recipe[]=[];
    
-    
-      
     getRecipes(){
         return this.recipes.slice();
     }
-    getRecipeById(id:number)
+    getRecipeById(id:number|undefined)
     {
+        if(id!==undefined)
         return this.recipes[id];
+        return null;
     }
     
     updateRecipes(recipes:Recipe[]){
         this.recipes=recipes;
         this.recipeChanged.next(this.recipes.slice());
-     //   console.log(this.recipes.slice());
     }
 }
