@@ -3,6 +3,7 @@ import { Injectable } from "@angular/core";
 import { Subject } from "rxjs";
 import { Recipe } from "../recipes/recipe.model";
 import { RecipeService } from "../recipes/recipe.service";
+import { tap } from 'rxjs/operators'
 
 @Injectable({providedIn:'root'})
 export class DataStorageService{
@@ -18,12 +19,10 @@ export class DataStorageService{
         });
     }
     fetchRecipes() {
-        this.http.get<Recipe[]>("https://chef-s-assistant-20129-default-rtdb.firebaseio.com/recipes.json")
-        .subscribe(recipes=>{
-            console.log(recipes);
+        return this.http.get<Recipe[]>("https://chef-s-assistant-20129-default-rtdb.firebaseio.com/recipes.json").pipe(tap(recipes=>{
             this.recipeService.updateRecipes(recipes);
-           
-        });
+        }));
+        
     }
 
 }

@@ -21,4 +21,19 @@ export class RecipeService{
         this.recipes=recipes;
         this.recipeChanged.next(this.recipes.slice());
     }
+
+    addRecipe(recipe:Recipe){
+        this.recipes.push(recipe);
+        this.recipeChanged.next(this.recipes.slice());
+    }
+    updateRecipe(recipe:Recipe,id:number|undefined){
+        if(id!==undefined)
+        this.recipes[id]=recipe;
+        this.recipeChanged.next(this.recipes.slice());
+    }
+    deleteRecipe(id:number|undefined){
+        if(id!==undefined)
+        this.recipes.splice(id,1);
+        this.recipeChanged.next(this.recipes.slice());
+    }
 }
