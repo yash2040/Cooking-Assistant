@@ -10,18 +10,21 @@ import { RecipeService } from '../recipe.service';
   templateUrl: './recipe-list.component.html',
   styleUrls: ['./recipe-list.component.css']
 })
-export class RecipeListComponent implements OnInit {
+export class RecipeListComponent implements OnInit,OnDestroy {
   recipes: Recipe[]=[];
   recipeSubscription:Subscription | undefined;
   constructor(private recipeService:RecipeService,private router:Router,private route:ActivatedRoute) { }
 
   ngOnInit() {
-    this.recipeService.recipeChanged.subscribe((recipes:Recipe[])=>{
+    this.recipeSubscription=this.recipeService.recipeChanged.subscribe((recipes:Recipe[])=>{
       this.recipes=recipes;
     });
     this.recipes=this.recipeService.getRecipes();
   }
   newRecipe(): void{
     this.router.navigate(['new'],{relativeTo:this.route})
+  }
+  ngOnDestroy(){
+    this.recipeSubscription?.unsubscribe();
   }
 }

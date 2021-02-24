@@ -6,9 +6,7 @@ import { Ingredient } from "./app/shared/ingredient.model";
 export class IngredientService{
 
     startedEditing=new Subject<number>();
-    ingredients:Ingredient[]=[
-        new Ingredient("Apple",10)
-    ]
+    ingredients:Ingredient[]=[];
 
     getIngredients(){
         return this.ingredients;
