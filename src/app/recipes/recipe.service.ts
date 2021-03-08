@@ -9,7 +9,11 @@ export class RecipeService{
     private recipes: Recipe[]=[];
    
     getRecipes(){
-        console.log(this.recipes);
+        if(this.recipes===null)
+        {
+            this.recipes=[];
+            this.recipeChanged.next([]);
+        }
         return this.recipes.slice();
     }
     getRecipeById(id:number|undefined)

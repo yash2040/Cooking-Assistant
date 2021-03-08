@@ -20,7 +20,9 @@ export class DataStorageService{
     }
     fetchRecipes() {
         return this.http.get<Recipe[]>("https://chef-s-assistant-20129-default-rtdb.firebaseio.com/recipes.json").pipe(tap(recipes=>{
-            this.recipeService.updateRecipes(recipes);
+        if(recipes===null)
+            recipes=[];    
+        this.recipeService.updateRecipes(recipes);
         }));
         
     }
