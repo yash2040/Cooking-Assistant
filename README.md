@@ -1,6 +1,7 @@
 # Chef's Assistant
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.0.7.
+Hosted Link: https://chef-s-assistant-20129.web.app/
 
 ## Development server
 
