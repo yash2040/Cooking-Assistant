@@ -30,6 +30,9 @@ export class RecipeDetailComponent implements OnInit {
   }
   toShoppingList()
   {
+    if(this.currRecipe.ingredients===undefined){
+      this.currRecipe.ingredients=[];
+    }
     for(let i=0;i<this.currRecipe.ingredients.length;i++)
     {
       let ingredientName=this.currRecipe.ingredients[i].name;
