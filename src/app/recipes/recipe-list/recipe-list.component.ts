@@ -13,18 +13,24 @@ import { RecipeService } from '../recipe.service';
 export class RecipeListComponent implements OnInit,OnDestroy {
   recipes: Recipe[]=[];
   recipeSubscription:Subscription | undefined;
-  constructor(private recipeService:RecipeService,private router:Router,private route:ActivatedRoute) { }
+  isFetching:boolean=false;
+  fetchingSubscription:Subscription|undefined;
+  constructor(private recipeService:RecipeService,private router:Router,private route:ActivatedRoute,private dataStorageService:DataStorageService) { }
 
   ngOnInit() {
     this.recipeSubscription=this.recipeService.recipeChanged.subscribe((recipes:Recipe[])=>{
       this.recipes=recipes;
     });
     this.recipes=this.recipeService.getRecipes();
+    this.fetchingSubscription=this.dataStorageService.isFetching.subscribe((val)=>{
+      this.isFetching=val;
+    });
   }
   newRecipe(): void{
     this.router.navigate(['new'],{relativeTo:this.route})
   }
   ngOnDestroy(){
     this.recipeSubscription?.unsubscribe();
+    this.fetchingSubscription?.unsubscribe();
   }
 }

@@ -8,8 +8,10 @@ import { tap } from 'rxjs/operators'
 @Injectable({providedIn:'root'})
 export class DataStorageService{
    
+    recipesAvailaible:boolean=false;
+    isFetching= new Subject<boolean>();
     constructor(private http:HttpClient,private recipeService:RecipeService){}
-
+    
     storeRecipes()
     {
         const recipes=this.recipeService.getRecipes();
@@ -19,9 +21,12 @@ export class DataStorageService{
         });
     }
     fetchRecipes() {
+        this.isFetching.next(true);
         return this.http.get<Recipe[]>("https://chef-s-assistant-20129-default-rtdb.firebaseio.com/recipes.json").pipe(tap(recipes=>{
         if(recipes===null)
-            recipes=[];    
+            recipes=[]; 
+        this.recipesAvailaible=true;
+        this.isFetching.next(false);
         this.recipeService.updateRecipes(recipes);
         }));
         
